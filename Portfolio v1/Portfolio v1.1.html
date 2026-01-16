@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Red & Black</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- CSS Reset & Variables --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --bg-color: #050505;
+            --card-bg: #121212;
+            --text-main: #ffffff;
+            --text-muted: #b3b3b3;
+            --primary-red: #ff0040;
+            --accent-gradient: linear-gradient(135deg, #ff0040, #ff5e00);
+            --glow: 0 0 20px rgba(255, 0, 64, 0.5);
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        /* --- Navigation --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 10%;
+            background-color: rgba(5, 5, 5, 0.95);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #333;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary-red);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .nav-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            margin-left: 30px;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-red);
+            text-shadow: var(--glow);
+        }
+
+        /* --- Social Icons (Header) --- */
+        .social-icons a {
+            color: var(--text-main);
+            font-size: 1.2rem;
+            margin-left: 20px;
+            transition: 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: var(--primary-red);
+            transform: scale(1.2);
+            text-shadow: var(--glow);
+        }
+
+        /* --- Hero/About Section --- */
+        .hero {
+            min-height: 90vh; /* Changed to min-height for better text fit */
+            padding: 100px 10%; /* Added padding so text doesn't hit edges */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: radial-gradient(circle at center, #1a0005 0%, #050505 70%);
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Specific styling for the About Paragraph */
+        .hero-text {
+            margin-top: 20px;
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            max-width: 800px; /* Limits width for readability */
+            line-height: 1.8;
+        }
+
+        .highlight {
+            color: var(--primary-red);
+            font-weight: 700;
+            text-shadow: 0 0 10px rgba(255, 0, 64, 0.2);
+        }
+
+        .btn {
+            margin-top: 40px;
+            padding: 12px 35px;
+            background: var(--primary-red);
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 50px;
+            box-shadow: var(--glow);
+            transition: transform 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            background: #ff1a53;
+        }
+
+        /* --- Generic Section Styles --- */
+        .section {
+            padding: 80px 10%;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            border-left: 5px solid var(--primary-red);
+            padding-left: 20px;
+        }
+
+        /* --- Languages / Skills Section --- */
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .skill-badge {
+            background: #121212;
+            border: 1px solid #333;
+            padding: 15px 30px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: 0.3s;
+        }
+
+        .skill-badge i {
+            font-size: 1.5rem;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .skill-badge:hover {
+            border-color: var(--primary-red);
+            box-shadow: var(--glow);
+            transform: translateY(-5px);
+        }
+
+        /* --- Projects Grid --- */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid #333;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            border-color: var(--primary-red);
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--accent-gradient);
+        }
+
+        .card h3 {
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .card-links a {
+            color: var(--primary-red);
+            text-decoration: none;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+        
+        .card-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 60px 20px;
+            background: #000;
+            border-top: 1px solid #333;
+            color: var(--text-muted);
+        }
+        
+        .footer-socials {
+            margin-bottom: 20px;
+        }
+
+        .footer-socials a {
+            color: var(--text-main);
+            font-size: 1.5rem;
+            margin: 0 15px;
+            transition: 0.3s;
+        }
+
+        .footer-socials a:hover {
+            color: var(--primary-red);
+            text-shadow: var(--glow);
+        }
+
+        /* --- Mobile Responsive --- */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3rem; }
+            nav { padding: 20px 5%; flex-direction: column; gap: 15px; }
+            .nav-links { margin-top: 10px; }
+            .nav-links a { margin: 0 10px; }
+            .section { padding: 60px 5%; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">PORTFOLIO.</div>
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#work">Work</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <div class="social-icons mobile-hide">
+            <a href="#" target="_blank"><i class="fa-brands fa-github"></i></a>
+            <a href="#" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+        </div>
+    </nav>
+
+    <section class="hero" id="about">
+        <h1>CREATIVE <br> <span>DEVELOPER.</span></h1>
+        
+        <p class="hero-text">
+            I am a developer driven by the convergence of logic and creativity. With a strong foundation in 
+            <span class="highlight">C</span> and <span class="highlight">Python</span>, 
+            I understand what happens deep under the hood, while my expertise in 
+            <span class="highlight">Node.js</span> and <span class="highlight">HTML5</span> 
+            allows me to build responsive, high-performance web applications. I don’t just write code; 
+            I engineer digital experiences that are efficient, scalable, and visually striking. 
+            I am constantly pushing the boundaries of what’s possible on the web, turning complex 
+            problems into elegant, user-centric solutions.
+        </p>
+
+        <a href="#work" class="btn">View My Work</a>
+    </section>
+
+    <section id="skills" class="section">
+        <h2 class="section-title">Languages Known</h2>
+        <div class="skills-grid">
+            <div class="skill-badge"><i class="fa-brands fa-python"></i> Python</div>
+            <div class="skill-badge"><i class="fa-brands fa-js"></i> JavaScript</div>
+            <div class="skill-badge"><i class="fa-brands fa-html5"></i> HTML5 & CSS3</div>
+            <div class="skill-badge"><i class="fa-brands fa-node-js"></i> Node.js</div>
+            <div class="skill-badge"><i class="fa-solid fa-c"></i> C Programming</div>
+            <div class="skill-badge"><i class="fa-brands fa-git-alt"></i> Git</div>
+            <div class="skill-badge"><i class="fa-brands fa-react"></i> React</div>
+            <div class="skill-badge"><i class="fa-solid fa-database"></i> SQL</div>
+        </div>
+    </section>
+
+    <section id="work" class="section">
+        <h2 class="section-title">Latest Projects</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Project Alpha</h3>
+                <p>A high-performance web application featuring dark mode and real-time data visualization.</p>
+                <div class="card-links">
+                    <a href="#"><i class="fa-brands fa-github"></i> Code</a>
+                    <a href="#"><i class="fa-solid fa-eye"></i> Live Demo</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Neon Dashboard</h3>
+                <p>Interactive analytics dashboard with custom charts and neon UI elements.</p>
+                <div class="card-links">
+                    <a href="#"><i class="fa-brands fa-github"></i> Code</a>
+                    <a href="#"><i class="fa-solid fa-eye"></i> Live Demo</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Red Shift</h3>
+                <p>An experimental art gallery website using WebGL for 3D interactions.</p>
+                <div class="card-links">
+                    <a href="#"><i class="fa-brands fa-github"></i> Code</a>
+                    <a href="#"><i class="fa-solid fa-eye"></i> Live Demo</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="footer-socials">
+            <a href="https://github.com" target="_blank"><i class="fa-brands fa-github"></i></a>
+            <a href="https://linkedin.com" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="mailto:email@example.com"><i class="fa-solid fa-envelope"></i></a>
+            <a href="https://twitter.com" target="_blank"><i class="fa-brands fa-twitter"></i></a>
+        </div>
+        <p>Interested in working together?</p>
+        <p style="margin-top: 10px; font-size: 0.9rem; color: #666;">&copy; 2026 Rohan Khadke. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
